@@ -1,9 +1,10 @@
 from PyQt5 import QtCore, QtWidgets
 
-from ..constants import REFERENCE
+from ..constants import REFERENCE, RESULT_MESSAGE
 from ..forms import Ui_DetectionWindow
 from ..multithreading import Worker
 from ..palettes import general_styles
+from .result_dialog import ResultDialog
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -30,9 +31,6 @@ class MainWindow(QtWidgets.QMainWindow):
             "Выберите директорию для загрузки картинки",
             "/",
         )
-        print(self.images)
-        print(self.directory_to_save)
-        # добавить потоки...
         if self.images:
             self.worker = Worker()
             self.worker.signals.result.connect()
@@ -51,5 +49,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 "Выберите файлы для детекции",
             )
     
-    def finish_detecting(self) -> None:
-        pass
+    def finish_detecting(self, info: dict) -> None:
+        QtWidgets.QMessageBox.warning(
+            self,
+            "Детекция завершена!",
+            RESULT_MESSAGE.format(directory_to_save=self.directory_to_save),
+        )
+
+        self.choose_file_window = ResultDialog(info)
+        self.choose_file_window.show()
+        self.choose_file_window.exec_()

@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QRunnable, pyqtSlot, pyqtSignal
+from PyQt5.QtCore import QRunnable, pyqtSlot, pyqtSignal, QObject
 
 
 class WorkerSignals(QObject):

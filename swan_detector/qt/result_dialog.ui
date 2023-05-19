@@ -21,13 +21,13 @@
        <property name="widgetResizable">
         <bool>true</bool>
        </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents">
+       <widget class="QWidget" name="list_detections">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>728</width>
-          <height>245</height>
+          <width>724</width>
+          <height>251</height>
          </rect>
         </property>
        </widget>
@@ -49,7 +49,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QToolButton" name="toolButton">
+        <widget class="QToolButton" name="ok_button">
          <property name="text">
           <string>ОК</string>
          </property>

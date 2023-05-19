@@ -29,6 +29,7 @@ class Ui_DetectionWindow(object):
         self.gridLayout.setObjectName("gridLayout")
         self.load_button = QtWidgets.QToolButton(self.tab)
         self.load_button.setMinimumSize(QtCore.QSize(300, 300))
+        self.load_button.setStyleSheet("")
         self.load_button.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/icons/download.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
