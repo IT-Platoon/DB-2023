@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/download.png</file>
+    <file>icons/question-mark.png</file>
+  </qresource>
+</RCC>
