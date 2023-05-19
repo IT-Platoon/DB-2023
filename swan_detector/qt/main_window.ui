@@ -39,6 +39,9 @@
           <property name="toolTip">
            <string>Загрузить данные для детекции</string>
           </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -71,8 +74,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>775</width>
-             <height>543</height>
+             <width>769</width>
+             <height>539</height>
             </rect>
            </property>
           </widget>
