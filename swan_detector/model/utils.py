@@ -1,4 +1,5 @@
 import os
+from typing import Callable
 
 import cv2
 import numpy as np
@@ -6,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def analyse_target_class(classes: list, conf: list) -> str:
+def analyse_target_class_by_conf(classes: list, conf: list):
     """ Бывают случаи, когда модель на одном изображении видит
     лебедей нескольких классов.
     Здесь будет искаться по параметру сумме conf каждого класса.
@@ -26,14 +27,36 @@ def analyse_target_class(classes: list, conf: list) -> str:
     return max(summator, key=summator.get)
 
 
+def analyse_target_class_by_count(classes: list, conf: list = None):
+    """ Бывают случаи, когда модель на одном изображении видит
+    лебедей нескольких классов.
+    Таргетом будет тот класс, которого больше предсказано на изображении.
+    return: str - target class. """
+
+    summator = {}
+    for i in range(len(classes)):
+
+        name_class = classes[i]
+
+        if name_class not in summator:
+            summator[name_class] = 1
+
+        else:
+            summator[name_class] += 1
+    
+    return max(summator, key=summator.get)
+
+
 def create_csv(
     filename_csv: str,
-    list_final_dict: list[dict],
+    list_final_dict: list,
     dir_save: str,
-) -> None:
+    analyzer: Callable = analyse_target_class_by_conf,
+):
     """ Создание csv-файла с двумя колонками: (filename, target).
     filename_csv: str - название csv файла.
     list_final_dict: list[dict] - список предсказанных изображений.
+    analyzer: function - функция подсчёта таргета на изображении.
     return: None """
 
     list_filename = []
@@ -44,7 +67,7 @@ def create_csv(
 
         list_filename.append(final_dict['filename'])
 
-        analyzed_target_class = analyse_target_class(
+        analyzed_target_class = analyzer(
             final_dict['classes'],
             final_dict['conf']
         )
