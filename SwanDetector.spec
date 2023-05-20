@@ -8,7 +8,7 @@ a = Analysis(
     ['swan_detector/__main__.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('swan_detector/model/weights/model.pt', 'swan_detector/model/weights/')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

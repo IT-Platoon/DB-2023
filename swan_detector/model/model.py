@@ -1,7 +1,6 @@
 import os
 from datetime import datetime
 
-
 from ultralytics import YOLO
 
 from .utils import save_imgs, create_csv, analyse_target_class_by_conf
@@ -32,7 +31,7 @@ def predict_one(model, filename: str) -> dict:
     """
 
     # Делаю предсказание.
-    result = model(filename, conf=0.4)[0]
+    result = model(filename, conf=0.4, verbose=False)[0]
 
     # Преобразую результат в изображение с box.
     img = result.plot()
