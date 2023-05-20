@@ -10,13 +10,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from . import resources
-
 
 class Ui_ResultItem(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(723, 295)
+        Form.resize(711, 371)
+        Form.setMinimumSize(QtCore.QSize(0, 0))
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.verticalLayout = QtWidgets.QVBoxLayout()

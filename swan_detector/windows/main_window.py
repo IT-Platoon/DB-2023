@@ -68,7 +68,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.directory_to_save,
                 self.model,
             )
-            self.worker.signals.finished.connect(self.finish_detecting)
+            self.worker.signals.finished.connect(
+                self.finish_detecting,
+            )
             self.threadpool = QtCore.QThreadPool()
             self.threadpool.start(self.worker)
             QtWidgets.QMessageBox.warning(

@@ -23,7 +23,7 @@ class Ui_ResultDialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.list_detections = QtWidgets.QWidget()
-        self.list_detections.setGeometry(QtCore.QRect(0, 0, 724, 251))
+        self.list_detections.setGeometry(QtCore.QRect(0, 0, 728, 245))
         self.list_detections.setObjectName("list_detections")
         self.scrollArea.setWidget(self.list_detections)
         self.verticalLayout.addWidget(self.scrollArea)
