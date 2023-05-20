@@ -1,8 +1,8 @@
 # DB-2023
 
-Приложение для детекции лебедей
-
 ## Установка
+
+Установка производилась на OS Linux KDE Manjaro
 
 1. Настройка виртуального окружения
 ```bash
@@ -13,12 +13,21 @@ pip uninstall opencv-python
 pip install opencv-python-headless
 ```
 
-2. Запуск приложения
+2. В папку ```swan_detector/model/weights``` поместить модель с именем ```model.pt```.
+
+3. Запуск приложения
 ```bash
 python -m swan_detector
 ```
 
-3. Сборка приложения
+4. Сборка приложения
 ```bash
 pyinstaller SwanDetector.spec
 ```
+
+## Используемые технологии
+
+- Python - язык программирования
+- PyQt - библиотека для разработки интерфейса
+- ultralytics - нейросеть для выделения объекта на изображении
+- Keras, scikit-image, CV2, PIL - аугментация (изменение картинок)
