@@ -27,7 +27,7 @@ def predict_one(model, filename: str):
     """
 
     # Делаю предсказание.
-    result = model(filename)[0]
+    result = model(filename, conf=0.4)[0]
 
     # Преобразую результат в изображение с box.
     img = result.plot()

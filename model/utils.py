@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import os
 
 
 def analyse_target_class(classes: list, conf: list):
@@ -50,3 +52,17 @@ def create_csv(filename_csv: str, list_final_dict: list):
     )
 
     df.to_csv(filename_csv)
+
+
+def save_imgs(list_final_dict: list, dir_save: str):
+    """ Сохранение всех предсказанных изображений с боксами.
+    list_final_dict: list[dict] - предсказанные данные.
+    dir_save: str - директория, в которую сохранить предсказанные изображения.
+    return: None """
+
+    # Создание папки
+    if not os.path.isdir(dir_save):
+        os.mkdir(dir_save)
+
+    for final_dict in list_final_dict:
+        plt.imsave(f'{dir_save}/{final_dict["filename"]}', final_dict['img'])
