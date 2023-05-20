@@ -51,8 +51,8 @@ def create_csv(
     filename_csv: str,
     list_final_dict: list,
     dir_save: str,
-    analyzer: Callable = analyse_target_class_by_conf,
-):
+    analyzer: Callable[[list, list | None], str] = analyse_target_class_by_conf,
+) -> None:
     """ Создание csv-файла с двумя колонками: (filename, target).
     filename_csv: str - название csv файла.
     list_final_dict: list[dict] - список предсказанных изображений.

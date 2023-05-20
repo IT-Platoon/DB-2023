@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>711</width>
-    <height>335</height>
+    <height>371</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -34,14 +34,14 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="start_image">
+      <widget class="QLabel" name="result_image">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="result_image">
+      <widget class="QLabel" name="start_image">
        <property name="text">
         <string/>
        </property>

@@ -22,4 +22,4 @@ class ResultItem(QtWidgets.QWidget):
             )
             image_places[index].setPixmap(pixmap_resized)
             image_places[index].setScaledContents(True)
-        self.ui.class_info.setText(SWAN_CLASSES[info[0]])
+        self.ui.class_info.setText(SWAN_CLASSES[info])

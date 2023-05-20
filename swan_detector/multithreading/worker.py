@@ -18,5 +18,9 @@ class Worker(QRunnable):
 
     @pyqtSlot()
     def run(self):
-        result = run_detection(self.model, self.images, self.directory_to_save)
+        result = run_detection(
+            self.model,
+            self.images,
+            self.directory_to_save,
+        )
         self.signals.finished.emit(result)

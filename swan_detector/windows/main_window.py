@@ -87,7 +87,9 @@ class MainWindow(QtWidgets.QMainWindow):
         QtWidgets.QMessageBox.warning(
             self,
             "Детекция завершена!",
-            RESULT_MESSAGE.format(directory_to_save=self.directory_to_save),
+            RESULT_MESSAGE.format(
+                directory_to_save=self.directory_to_save,
+            ),
         )
 
         self.view_result = ResultDialog(info)

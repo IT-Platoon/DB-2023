@@ -6,8 +6,6 @@ from swan_detector.palettes import result_dialog_styles
 
 
 class ResultDialog(QtWidgets.QDialog):
-    saveClicked = QtCore.pyqtSignal(str, bool)
-
     def __init__(self, info: dict):
         super().__init__()
         self.setWindowModality(QtCore.Qt.ApplicationModal)
@@ -18,7 +16,7 @@ class ResultDialog(QtWidgets.QDialog):
         self.vbox.setSpacing(10)
         for item in info:
             images = [item["filename"], item["result_path"]]
-            item = ResultItem(images, item["classes"])
+            item = ResultItem(images, item["target_image"])
             self.vbox.insertWidget(0, item)
             self.vbox.addStretch()
         self.ui.list_detections.setLayout(self.vbox)

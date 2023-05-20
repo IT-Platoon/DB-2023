@@ -4,7 +4,7 @@ from ultralytics import YOLO
 from .utils import save_imgs, create_csv, analyse_target_class_by_conf
 
 
-def load_model(path: str):
+def load_model(path: str) -> YOLO:
     """ Загрузка модели.
     return: model """
 
@@ -78,11 +78,14 @@ def predict_many(model, list_filenames: list[str]) -> list[dict]:
 
 
 def get_csv_filename() -> str:
-    now_datetime = str(datetime.now()).replace(" ", "-").replace(".", "-").replace(":", "-")
+    bad_symbols = (" ", ".", ":")
+    now_datetime = str(datetime.now())
+    for symbol in bad_symbols:
+        now_datetime.replace(symbol, "-")
     return f"detection_{now_datetime}.csv"
 
 
-def run_detection(model, list_filenames: list[str], dir_save: str) -> list:
+def run_detection(model, list_filenames: list[str], dir_save: str) -> list[dict]:
     list_final_dict = predict_many(model, list_filenames)
     list_final_dict = save_imgs(list_final_dict, dir_save)
     create_csv(get_csv_filename(), list_final_dict, dir_save)
