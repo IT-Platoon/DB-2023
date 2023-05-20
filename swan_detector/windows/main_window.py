@@ -36,7 +36,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.images,
                 self.directory_to_save,
             )
-            self.worker.signals.result.connect()
+            print(self.images)
+            print(self.directory_to_save)
             self.worker.signals.finished.connect(self.finish_detecting)
             self.threadpool = QtCore.QThreadPool()
             self.threadpool.start(self.worker)
