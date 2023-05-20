@@ -2,6 +2,8 @@ from ultralytics import YOLO
 import matplotlib.pyplot as plt
 import os
 
+from swan_detector.model.utils import save_imgs
+
 
 def load_model(path: str):
     """ Загрузка модели.
@@ -71,14 +73,11 @@ def predict_many(model, list_filenames: list):
     return list_final_dict
 
 
-def run_detection():
-    CUR_PATH = os.path.dirname(__file__)
-    model = load_model(CUR_PATH + '/weights/best.pt')
+def run_detection(model, list_filenames: list, dir_save: str):
+    """  """
 
-    pred = predict_one(model, CUR_PATH + '/img/small.png')
-    print(pred)
-
-    plt.imsave('result.jpg', pred['img'])
+    list_final_dict = predict_many(model, list_filenames)
+    save_imgs(list_final_dict, dir_save)
 
 
 if __name__ == '__main__':
