@@ -22,7 +22,8 @@ python -m swan_detector
 
 4. Сборка приложения
 ```bash
-pyinstaller SwanDetector.spec
+pyinstaller swan_detector.spec
+cp -r ./venv/lib/python3.10/site-packages/ultralytics ./dist/swan_detector/
 ```
 
 ## Используемые технологии

@@ -8,7 +8,7 @@ a = Analysis(
     ['swan_detector/__main__.py'],
     pathex=[],
     binaries=[],
-    datas=[('swan_detector/model/weights/model.pt', 'swan_detector/model/weights/')],
+    datas=[('swan_detector/model/weights/model.pt', 'model/weights/')],
     hiddenimports=[
                 'altgraph',
                 'auto_py_to_exe',
@@ -83,7 +83,7 @@ a = Analysis(
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=['swan_detector/qt'],
+    excludes=[],
     win_no_prefer_redirects=False,
     win_private_assemblies=False,
     cipher=block_cipher,
@@ -116,5 +116,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='SwanDetector',
+    name='swan_detector',
 )
