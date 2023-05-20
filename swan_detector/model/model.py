@@ -1,4 +1,7 @@
+import os
 from datetime import datetime
+
+
 from ultralytics import YOLO
 
 from .utils import save_imgs, create_csv, analyse_target_class_by_conf
@@ -77,18 +80,22 @@ def predict_many(model, list_filenames: list[str]) -> list[dict]:
     return list_final_dict
 
 
-def get_csv_filename() -> str:
+def get_directory_name() -> str:
     bad_symbols = (" ", ".", ":")
-    now_datetime = str(datetime.now())
-    for symbol in bad_symbols:
-        now_datetime.replace(symbol, "-")
-    return f"detection_{now_datetime}.csv"
+    now_datetime = []
+    for symbol in str(datetime.now()):
+        now_datetime.append(
+            symbol if symbol not in bad_symbols else "-"     
+        )
+    return f"detection_{''.join(now_datetime)}"
 
 
 def run_detection(model, list_filenames: list[str], dir_save: str) -> list[dict]:
     list_final_dict = predict_many(model, list_filenames)
+    dir_name = get_directory_name()
+    dir_save = os.path.join(dir_save, dir_name)
     list_final_dict = save_imgs(list_final_dict, dir_save)
-    create_csv(get_csv_filename(), list_final_dict, dir_save)
+    create_csv(f"{dir_name}.csv", list_final_dict, dir_save)
     return list_final_dict
 
 
