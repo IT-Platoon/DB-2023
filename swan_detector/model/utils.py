@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def analyse_target_class_by_conf(classes: list, conf: list):
+def analyse_target_class_by_conf(classes: list, conf: list) -> str:
     """ Бывают случаи, когда модель на одном изображении видит
     лебедей нескольких классов.
     Здесь будет искаться по параметру сумме conf каждого класса.
@@ -27,7 +27,7 @@ def analyse_target_class_by_conf(classes: list, conf: list):
     return max(summator, key=summator.get)
 
 
-def analyse_target_class_by_count(classes: list, conf: list = None):
+def analyse_target_class_by_count(classes: list, conf: list = None) -> str:
     """ Бывают случаи, когда модель на одном изображении видит
     лебедей нескольких классов.
     Таргетом будет тот класс, которого больше предсказано на изображении.
