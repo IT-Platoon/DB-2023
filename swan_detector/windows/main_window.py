@@ -1,9 +1,9 @@
 from PyQt5 import QtCore, QtWidgets
 
-from ..constants import REFERENCE, RESULT_MESSAGE
-from ..forms import Ui_DetectionWindow
-from ..multithreading import Worker
-from ..palettes import general_styles
+from swan_detector.constants import REFERENCE, RESULT_MESSAGE
+from swan_detector.forms import Ui_DetectionWindow
+from swan_detector.multithreading import Worker
+from swan_detector.palettes import general_styles
 from .result_dialog import ResultDialog
 
 

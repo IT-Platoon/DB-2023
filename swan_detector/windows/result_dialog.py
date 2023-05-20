@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 
-from ..forms import Ui_ResultDialog
-from ..widgets import ResultItem
+from swan_detector.forms import Ui_ResultDialog
+from swan_detector.widgets import ResultItem
 
 
 class ResultDialog(QtWidgets.QDialog):

@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 from pyqt_slideshow import SlideShow
 
-from ..forms import Ui_ResultItem
+from swan_detector.forms import Ui_ResultItem
 
 
 class ResultItem(QtWidgets.QWidget):
