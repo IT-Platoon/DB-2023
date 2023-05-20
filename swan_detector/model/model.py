@@ -1,8 +1,7 @@
+from datetime import datetime
 from ultralytics import YOLO
-import matplotlib.pyplot as plt
-import os
 
-from swan_detector.model.utils import save_imgs
+from .utils import save_imgs, create_csv
 
 
 def load_model(path: str):
@@ -13,7 +12,7 @@ def load_model(path: str):
     return model
 
 
-def predict_one(model, filename: str):
+def predict_one(model, filename: str) -> dict:
     """ Предсказание детекции и класса лебедя.
     model: ранее загруженная модель для предсказания.
     filename: str - название ОДНОГО файла или url
@@ -59,7 +58,7 @@ def predict_one(model, filename: str):
     return final_dict
 
 
-def predict_many(model, list_filenames: list):
+def predict_many(model, list_filenames: list[str]) -> list[dict]:
     """ Предсказание списка файлов.
     model: модель, которая предсказывает.
     list_filenames: list[str] - список названий файлов или url.
@@ -73,11 +72,16 @@ def predict_many(model, list_filenames: list):
     return list_final_dict
 
 
-def run_detection(model, list_filenames: list, dir_save: str):
-    """  """
+def get_csv_filename() -> str:
+    now_datetime = str(datetime.now()).replace(" ", "-").replace(".", "-").replace(":", "-")
+    return f"detection_{now_datetime}.csv"
 
+
+def run_detection(model, list_filenames: list[str], dir_save: str) -> list:
     list_final_dict = predict_many(model, list_filenames)
-    save_imgs(list_final_dict, dir_save)
+    list_final_dict = save_imgs(list_final_dict, dir_save)
+    create_csv(get_csv_filename(), list_final_dict, dir_save)
+    return list_final_dict
 
 
 if __name__ == '__main__':

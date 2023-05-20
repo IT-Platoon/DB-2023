@@ -9,17 +9,18 @@ class ResultDialog(QtWidgets.QDialog):
 
     def __init__(self, info: dict):
         super().__init__()
+        self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.ui = Ui_ResultDialog()
         self.ui.setupUi(self)
-        self.widget = QtWidgets.QWidget()
+        self.setMinimumSize(1120, 600)
         self.vbox = QtWidgets.QVBoxLayout()
         self.vbox.setSpacing(10)
-        for image, swan in info.items():
-            item = ResultItem(image, swan)
+        for item in info:
+            images = [item["filename"], item["result_path"]]
+            item = ResultItem(images, item["classes"])
             self.vbox.insertWidget(0, item)
             self.vbox.addStretch()
-        self.widget.setLayout(self.vbox)
-        self.ui.list_detections.setWidget(self.widget)
+        self.ui.list_detections.setLayout(self.vbox)
 
     @QtCore.pyqtSlot()
     def on_ok_button_clicked(self) -> None:

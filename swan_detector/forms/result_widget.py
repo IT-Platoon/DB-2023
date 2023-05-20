@@ -9,22 +9,34 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 from . import resources
 
 
 class Ui_ResultItem(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(706, 295)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(Form)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.widget = QtWidgets.QWidget(Form)
-        self.widget.setObjectName("widget")
-        self.horizontalLayout_2.addWidget(self.widget)
-        self.info = QtWidgets.QLabel(Form)
-        self.info.setText("")
-        self.info.setObjectName("info")
-        self.horizontalLayout_2.addWidget(self.info)
+        Form.resize(723, 295)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.class_info = QtWidgets.QLabel(Form)
+        self.class_info.setText("")
+        self.class_info.setObjectName("class_info")
+        self.verticalLayout.addWidget(self.class_info)
+        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.start_image = QtWidgets.QLabel(Form)
+        self.start_image.setText("")
+        self.start_image.setObjectName("start_image")
+        self.horizontalLayout.addWidget(self.start_image)
+        self.result_image = QtWidgets.QLabel(Form)
+        self.result_image.setText("")
+        self.result_image.setObjectName("result_image")
+        self.horizontalLayout.addWidget(self.result_image)
+        self.verticalLayout_2.addLayout(self.horizontalLayout)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

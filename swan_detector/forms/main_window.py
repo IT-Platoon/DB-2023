@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/media/zzarryadd/E602B7E902B7BD3D10/Users/Admin/YandexDisk/coding/Hakatons/DB-2023/swan_detector/qt/main_window.ui'
+# Form implementation generated from reading ui file '/run/media/zzarryadd/Dump/YandexDisk/coding/Hakatons/DB-2023/swan_detector/qt/main_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 from . import resources
 
 
@@ -27,7 +28,11 @@ class Ui_DetectionWindow(object):
         self.tab.setObjectName("tab")
         self.gridLayout = QtWidgets.QGridLayout(self.tab)
         self.gridLayout.setObjectName("gridLayout")
-        self.load_button = QtWidgets.QToolButton(self.tab)
+        self.widget = QtWidgets.QWidget(self.tab)
+        self.widget.setObjectName("widget")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.widget)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.load_button = QtWidgets.QToolButton(self.widget)
         self.load_button.setMinimumSize(QtCore.QSize(300, 300))
         self.load_button.setStyleSheet("")
         self.load_button.setText("")
@@ -36,7 +41,14 @@ class Ui_DetectionWindow(object):
         self.load_button.setIcon(icon)
         self.load_button.setIconSize(QtCore.QSize(64, 64))
         self.load_button.setObjectName("load_button")
-        self.gridLayout.addWidget(self.load_button, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.load_button, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.widget, 1, 0, 1, 1)
+        self.comboBox = QtWidgets.QComboBox(self.tab)
+        self.comboBox.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.gridLayout.addWidget(self.comboBox, 0, 0, 1, 1)
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
@@ -46,7 +58,7 @@ class Ui_DetectionWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.list_detections = QtWidgets.QWidget()
-        self.list_detections.setGeometry(QtCore.QRect(0, 0, 769, 539))
+        self.list_detections.setGeometry(QtCore.QRect(0, 0, 775, 543))
         self.list_detections.setObjectName("list_detections")
         self.scrollArea.setWidget(self.list_detections)
         self.gridLayout_4.addWidget(self.scrollArea, 0, 0, 1, 1)
@@ -70,6 +82,8 @@ class Ui_DetectionWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.load_button.setToolTip(_translate("MainWindow", "Загрузить данные для детекции"))
+        self.comboBox.setItemText(0, _translate("MainWindow", "Указать файл(ы) для детекции"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "Указать путь до директории с файлами"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Детекция"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "История"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), _translate("MainWindow", "Справка"))

@@ -1,28 +1,24 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
-from pyqt_slideshow import SlideShow
 
 from swan_detector.forms import Ui_ResultItem
 
 
 class ResultItem(QtWidgets.QWidget):
     def __init__(self, image_paths: list, info: str) -> None:
+        super().__init__()
         self.ui = Ui_ResultItem()
         self.ui.setupUi(self)
-        self.image_paths = image_paths
-        slider = SlideShow()
-        slider.setFilenames(image_paths)
-        slider.setTimerEnabled(False)
-        self.vbox = QtWidgets.QVBoxLayout()
-        self.vbox.insertWidget(0, slider)
-        self.vbox.addStretch()
-        self.widget.setLayout(self.vbox)
-        slider.show()
-        self.ui.info.setText(info)
-
-    @QtCore.pyqtSlot()
-    def on_left_button_clicked(self) -> None:
-        pass
-
-    @QtCore.pyqtSlot()
-    def on_right_button_clicked(self) -> None:
-        pass
+        image_places = [self.ui.start_image, self.ui.result_image]
+        self.start_image = image_paths[0]
+        self.result_image = image_paths[1]
+        for index, image_path in enumerate(image_paths):
+            image = QtGui.QImage(image_path)
+            pixmap = QtGui.QPixmap.fromImage(image)
+            pixmap_resized = pixmap.scaled(
+                512,
+                512,
+                QtCore.Qt.KeepAspectRatio,
+            )
+            image_places[index].setPixmap(pixmap_resized)
+            image_places[index].setScaledContents(True)
+        self.ui.class_info.setText(info[0])

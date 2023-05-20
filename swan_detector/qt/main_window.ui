@@ -28,33 +28,56 @@
         <string>Детекция</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
+        <item row="1" column="0">
+         <widget class="QWidget" name="widget" native="true">
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="QToolButton" name="load_button">
+             <property name="minimumSize">
+              <size>
+               <width>300</width>
+               <height>300</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>Загрузить данные для детекции</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/icons/download.png</normaloff>:/icons/icons/download.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>64</width>
+               <height>64</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
         <item row="0" column="0">
-         <widget class="QToolButton" name="load_button">
-          <property name="minimumSize">
-           <size>
-            <width>300</width>
-            <height>300</height>
-           </size>
+         <widget class="QComboBox" name="comboBox">
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
           </property>
-          <property name="toolTip">
-           <string>Загрузить данные для детекции</string>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="resources.qrc">
-            <normaloff>:/icons/icons/download.png</normaloff>:/icons/icons/download.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>64</width>
-            <height>64</height>
-           </size>
-          </property>
+          <item>
+           <property name="text">
+            <string>Указать файл(ы) для детекции</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Указать путь до директории с файлами</string>
+           </property>
+          </item>
          </widget>
         </item>
        </layout>
@@ -74,8 +97,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>769</width>
-             <height>539</height>
+             <width>775</width>
+             <height>543</height>
             </rect>
            </property>
           </widget>

@@ -1,30 +1,36 @@
-import pandas as pd
-import matplotlib.pyplot as plt
 import os
 
+import cv2
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-def analyse_target_class(classes: list, conf: list):
+
+def analyse_target_class(classes: list, conf: list) -> str:
     """ Бывают случаи, когда модель на одном изображении видит
     лебедей нескольких классов.
     Здесь будет искаться по параметру сумме conf каждого класса.
     У какого класса больше conf, тот и будет таргетом.
     return: str - target class. """
-
     summator = {}
     for i in range(len(classes)):
 
         name_class = classes[i]
 
         if name_class not in summator:
-            summator[name_class] = conf[i]
+            summator[name_class] = conf[i].item()
 
         else:
-            summator[name_class] += conf[i]
+            summator[name_class] += conf[i].item()
     
     return max(summator, key=summator.get)
 
 
-def create_csv(filename_csv: str, list_final_dict: list):
+def create_csv(
+    filename_csv: str,
+    list_final_dict: list[dict],
+    dir_save: str,
+) -> None:
     """ Создание csv-файла с двумя колонками: (filename, target).
     filename_csv: str - название csv файла.
     list_final_dict: list[dict] - список предсказанных изображений.
@@ -51,10 +57,10 @@ def create_csv(filename_csv: str, list_final_dict: list):
         }
     )
 
-    df.to_csv(filename_csv)
+    df.to_csv(os.path.join(dir_save, filename_csv))
 
 
-def save_imgs(list_final_dict: list, dir_save: str):
+def save_imgs(list_final_dict: list, dir_save: str) -> list[dict]:
     """ Сохранение всех предсказанных изображений с боксами.
     list_final_dict: list[dict] - предсказанные данные.
     dir_save: str - директория, в которую сохранить предсказанные изображения.
@@ -65,4 +71,10 @@ def save_imgs(list_final_dict: list, dir_save: str):
         os.mkdir(dir_save)
 
     for final_dict in list_final_dict:
-        plt.imsave(f'{dir_save}/{final_dict["filename"]}', final_dict['img'])
+        filename = os.path.basename(final_dict["filename"])
+        path = os.path.join(dir_save, filename)
+        final_dict["result_path"] = path
+        image = cv2.cvtColor(final_dict["img"], cv2.COLOR_BGR2RGB)
+        pixels = np.array(image)
+        plt.imsave(path, pixels)
+    return list_final_dict

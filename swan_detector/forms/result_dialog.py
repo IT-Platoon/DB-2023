@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/media/zzarryadd/E602B7E902B7BD3D10/Users/Admin/YandexDisk/coding/Hakatons/DB-2023/swan_detector/qt/result_dialog.ui'
+# Form implementation generated from reading ui file '/run/media/zzarryadd/Dump/YandexDisk/coding/Hakatons/DB-2023/swan_detector/qt/result_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
