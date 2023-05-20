@@ -1,14 +1,28 @@
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
+from pyqt_slideshow import SlideShow
 
 from ..forms import Ui_ResultItem
 
 
-class ResultItem(QtWidgets.QWidget, Ui_ResultItem):
-    def __init__(self, image_path, info):
-        self.setupUi(self)
-        image = QtGui.QImage(image_path)
-        pixmap = QtGui.QPixmap.fromImage(image)
+class ResultItem(QtWidgets.QWidget):
+    def __init__(self, image_paths: list, info: str) -> None:
+        self.ui = Ui_ResultItem()
+        self.ui.setupUi(self)
+        self.image_paths = image_paths
+        slider = SlideShow()
+        slider.setFilenames(image_paths)
+        slider.setTimerEnabled(False)
+        self.vbox = QtWidgets.QVBoxLayout()
+        self.vbox.insertWidget(0, slider)
+        self.vbox.addStretch()
+        self.widget.setLayout(self.vbox)
+        slider.show()
+        self.ui.info.setText(info)
 
-        self.info.setText(info)
-        self.image.setPixmap(pixmap)
-        self.image.setScaledContents(True)
+    @QtCore.pyqtSlot()
+    def on_left_button_clicked(self) -> None:
+        pass
+
+    @QtCore.pyqtSlot()
+    def on_right_button_clicked(self) -> None:
+        pass

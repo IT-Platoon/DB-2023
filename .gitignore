@@ -3,8 +3,8 @@ __pycache__/
 coverage.xml
 staticfiles/
 celerybeat-schedule
+venv
 .venv
-venv/
 *.log
 coverage
 .vscode
@@ -13,3 +13,5 @@ coverage
 .ipython/
 .idea
 .env
+dist
+build

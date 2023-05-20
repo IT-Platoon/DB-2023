@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/media/zzarryadd/E602B7E902B7BD3D10/Users/Admin/YandexDisk/coding/Hakatons/DB-2023/swan_detector/qt/result_widget.ui'
+# Form implementation generated from reading ui file '/run/media/zzarryadd/Dump/YandexDisk/coding/Hakatons/DB-2023/swan_detector/qt/result_widget.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -9,20 +9,22 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from . import resources
 
 
 class Ui_ResultItem(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(600, 220)
-        self.image = QtWidgets.QLabel(Form)
-        self.image.setGeometry(QtCore.QRect(10, 20, 200, 181))
-        self.image.setText("")
-        self.image.setObjectName("image")
+        Form.resize(706, 295)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(Form)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.widget = QtWidgets.QWidget(Form)
+        self.widget.setObjectName("widget")
+        self.horizontalLayout_2.addWidget(self.widget)
         self.info = QtWidgets.QLabel(Form)
-        self.info.setGeometry(QtCore.QRect(220, 20, 361, 181))
         self.info.setText("")
         self.info.setObjectName("info")
+        self.horizontalLayout_2.addWidget(self.info)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

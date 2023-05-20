@@ -5,9 +5,11 @@ description = ""
 authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.7, <3.12"
 PyQt5 = "^5.15.4"
 pyqt5ac = "^1.2.1"
+pyqt-slideshow = "^0.0.22"
+pyinstaller = "^5.11.0"
 
 [tool.poetry.dev-dependencies]
 
