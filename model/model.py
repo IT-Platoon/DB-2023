@@ -18,10 +18,11 @@ def predict_one(model, filename: str):
     
     return: dict - результат предсказания в формате 
     {
-        'filename': str,
-        'classes': list,
-        'count_swan': int,
-        'img': Image
+        'filename': str,  # Название изображения.
+        'classes': list,  # Классы, которые имеются на изображении.
+        'conf': list,  # Достоверность предсказанного класса.
+        'count_swan': int,  # Кол-во лебедей на изображении.
+        'img': Image  # Изображение с боксами лебедей.
     }
     """
 
@@ -31,15 +32,24 @@ def predict_one(model, filename: str):
     # Преобразую результат в изображение с box.
     img = result.plot()
 
+    # Получаю классы, которые есть на изображении.
     classes = []
     for i in result.boxes.cls:
         classes.append(model.names[int(i)])
 
+    # Достоверность предсказания того или иного класса.
+    conf = []
+    for i in result.boxes.conf:
+        conf.append(i)
+
+    # Количество лебедей на изображении.
     count_swan = len(classes)
 
+    # Результат предсказания хранится тут.
     final_dict = {
         'filename': filename,
         'classes': classes,
+        'conf': conf,
         'count_swan': count_swan,
         'img': img
     }
@@ -48,7 +58,17 @@ def predict_one(model, filename: str):
 
 
 def predict_many(model, list_filenames: list):
-    """ Предсказание  """
+    """ Предсказание списка файлов.
+    model: модель, которая предсказывает.
+    list_filenames: list[str] - список названий файлов или url.
+    return: list[dict] - список предсказаний каждого изображения. """
+
+    list_final_dict = []
+    for filename in list_filenames:
+        final_dict = predict_one(model, filename)
+        list_final_dict.append(final_dict)
+
+    return list_final_dict
 
 
 if __name__ == '__main__':
@@ -60,4 +80,4 @@ if __name__ == '__main__':
     pred = predict_one(model, CUR_PATH + '/img/small.png')
     print(pred)
 
-    plt.imshow(pred['img'])
+    plt.imsave('result.jpg', pred['img'])
