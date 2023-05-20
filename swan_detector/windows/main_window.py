@@ -61,8 +61,9 @@ class MainWindow(QtWidgets.QMainWindow):
             "/",
         )
         if self.images and self.directory_to_save:
+            basedir = os.path.abspath(os.curdir)
             if self.model is None:
-                self.model = load_model(self.path_to_model)
+                self.model = load_model(os.path.join(basedir, self.path_to_model))
             self.worker = Worker(
                 self.images,
                 self.directory_to_save,
