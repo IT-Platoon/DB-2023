@@ -80,7 +80,7 @@ def create_csv(
         }
     )
 
-    df.to_csv(os.path.join(dir_save, filename_csv))
+    df.to_csv(os.path.join(dir_save, filename_csv), index=False)
 
 
 def save_imgs(list_final_dict: list, dir_save: str) -> list[dict]:
