@@ -31,8 +31,11 @@ class MainWindow(QtWidgets.QMainWindow):
             "Выберите директорию для загрузки картинки",
             "/",
         )
-        if self.images:
-            self.worker = Worker()
+        if self.images and self.directory_to_save:
+            self.worker = Worker(
+                self.images,
+                self.directory_to_save,
+            )
             self.worker.signals.result.connect()
             self.worker.signals.finished.connect(self.finish_detecting)
             self.threadpool = QtCore.QThreadPool()
@@ -40,13 +43,13 @@ class MainWindow(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(
                 self,
                 "Отлично!",
-                "Файлы загружены",
+                "Файлы загружены. Процесс детекции начался.",
             )
         else:
             QtWidgets.QMessageBox.warning(
                 self,
                 "Ошибка!",
-                "Выберите файлы для детекции",
+                "Выберите файлы для детекции и путь для выгрузки отчета.",
             )
     
     def finish_detecting(self, info: dict) -> None:

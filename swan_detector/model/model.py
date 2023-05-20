@@ -71,13 +71,15 @@ def predict_many(model, list_filenames: list):
     return list_final_dict
 
 
-if __name__ == '__main__':
-
+def run_detection():
     CUR_PATH = os.path.dirname(__file__)
-
     model = load_model(CUR_PATH + '/weights/best.pt')
 
     pred = predict_one(model, CUR_PATH + '/img/small.png')
     print(pred)
 
     plt.imsave('result.jpg', pred['img'])
+
+
+if __name__ == '__main__':
+    run_detection()

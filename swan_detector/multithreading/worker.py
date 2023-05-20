@@ -1,5 +1,7 @@
 from PyQt5.QtCore import QRunnable, pyqtSlot, pyqtSignal, QObject
 
+from swan_detector.model import run_detection
+
 
 class WorkerSignals(QObject):
     finished = pyqtSignal()
@@ -8,11 +10,11 @@ class WorkerSignals(QObject):
 
 
 class Worker(QRunnable):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, images: list[str], directory_to_save: str):
         super().__init__()
-        self.args = args
-        self.kwargs = kwargs
+        self.images = images
+        self.directory_to_save = directory_to_save
 
     @pyqtSlot()
     def run(self):
-        pass
+        run_detection()
