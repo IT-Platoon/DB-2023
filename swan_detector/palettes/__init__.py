@@ -1,5 +1,7 @@
-from .general import general_styles
+from .main_window import main_window_styles
+from .result_dialog import result_dialog_styles
 
 __all__ = (
-    general_styles,
+    main_window_styles,
+    result_dialog_styles,
 )

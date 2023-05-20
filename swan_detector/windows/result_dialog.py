@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, QtCore
 
 from swan_detector.forms import Ui_ResultDialog
 from swan_detector.widgets import ResultItem
+from swan_detector.palettes import result_dialog_styles
 
 
 class ResultDialog(QtWidgets.QDialog):
@@ -21,6 +22,7 @@ class ResultDialog(QtWidgets.QDialog):
             self.vbox.insertWidget(0, item)
             self.vbox.addStretch()
         self.ui.list_detections.setLayout(self.vbox)
+        self.setStyleSheet(result_dialog_styles)
 
     @QtCore.pyqtSlot()
     def on_ok_button_clicked(self) -> None:

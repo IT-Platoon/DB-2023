@@ -1,4 +1,4 @@
-general_styles = """
+main_window_styles = """
 *{
   color: #000;
 }

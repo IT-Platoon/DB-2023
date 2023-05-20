@@ -2,11 +2,17 @@ import os
 
 from PyQt5 import QtCore, QtWidgets
 
-from swan_detector.constants import REFERENCE, RESULT_MESSAGE, MethodsLoad
+from swan_detector.constants import (
+    REFERENCE,
+    RESULT_MESSAGE,
+    MethodsLoad,
+    SUCCESS_SELECT,
+    FAILED_SELECT,
+)
 from swan_detector.forms import Ui_DetectionWindow
 from swan_detector.model import load_model
 from swan_detector.multithreading import Worker
-from swan_detector.palettes import general_styles
+from swan_detector.palettes import main_window_styles
 from .result_dialog import ResultDialog
 
 
@@ -19,7 +25,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.images = []
         self.ui.reference.setPlainText(REFERENCE)
         self.ui.reference.setReadOnly(True)
-        self.setStyleSheet(general_styles)
+        self.setStyleSheet(main_window_styles)
         self.path_to_model = "swan_detector/model/weights/model.pt"
         self.model = None
 
@@ -68,13 +74,13 @@ class MainWindow(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(
                 self,
                 "Отлично!",
-                "Файлы загружены. Процесс детекции начался. По окончании процесса будет соответствующее окно.",
+                SUCCESS_SELECT,
             )
         else:
             QtWidgets.QMessageBox.warning(
                 self,
                 "Ошибка!",
-                "Либо отсутствуют файлы для детекции, либо не выбран путь для сохранения отчета.",
+                FAILED_SELECT,
             )
 
     def finish_detecting(self, info: list) -> None:
