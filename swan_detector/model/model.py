@@ -1,7 +1,7 @@
 from datetime import datetime
 from ultralytics import YOLO
 
-from .utils import save_imgs, create_csv
+from .utils import save_imgs, create_csv, analyse_target_class_by_conf
 
 
 def load_model(path: str):
@@ -23,6 +23,7 @@ def predict_one(model, filename: str) -> dict:
         'classes': list,  # Классы, которые имеются на изображении.
         'conf': list,  # Достоверность предсказанного класса.
         'count_swan': int,  # Кол-во лебедей на изображении.
+        'target_image': str,  # Предсказанный класс для картинки.
         'img': Image  # Изображение с боксами лебедей.
     }
     """
@@ -46,12 +47,16 @@ def predict_one(model, filename: str) -> dict:
     # Количество лебедей на изображении.
     count_swan = len(classes)
 
+    # Предсказанный класс для картинки.
+    target_image = analyse_target_class_by_conf(classes, conf)
+
     # Результат предсказания хранится тут.
     final_dict = {
         'filename': filename,
         'classes': classes,
         'conf': conf,
         'count_swan': count_swan,
+        'target_image': target_image,
         'img': img
     }
 
