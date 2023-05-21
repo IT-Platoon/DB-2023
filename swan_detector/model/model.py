@@ -3,7 +3,7 @@ from datetime import datetime
 
 from ultralytics import YOLO
 
-from .utils import save_imgs, create_csv, analyse_target_class_by_conf
+from .utils import save_imgs, create_csv_custom, analyse_target_class_by_conf
 
 
 def load_model(path: str) -> YOLO:
@@ -94,7 +94,7 @@ def run_detection(model, list_filenames: list[str], dir_save: str) -> list[dict]
     dir_name = get_directory_name()
     dir_save = os.path.join(dir_save, dir_name)
     list_final_dict = save_imgs(list_final_dict, dir_save)
-    create_csv(f"{dir_name}.csv", list_final_dict, dir_save)
+    create_csv_custom(f"{dir_name}.csv", list_final_dict, dir_save)
     return list_final_dict
 
 
