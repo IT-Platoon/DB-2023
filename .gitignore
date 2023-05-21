@@ -16,3 +16,9 @@ coverage
 .env
 dist
 build
+.ipynb_checkpoints
+new_data
+images
+runs
+classification_model
+segmentation_model

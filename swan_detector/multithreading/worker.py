@@ -8,7 +8,7 @@ class WorkerSignals(QObject):
 
 
 class Worker(QRunnable):
-    
+
     def __init__(self, images: list[str], directory_to_save: str, model):
         super().__init__()
         self.signals = WorkerSignals()

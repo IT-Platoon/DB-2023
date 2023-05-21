@@ -1,7 +1,6 @@
 import os
 from datetime import datetime
 
-
 from ultralytics import YOLO
 
 from .utils import save_imgs, create_csv, analyse_target_class_by_conf
@@ -32,7 +31,7 @@ def predict_one(model, filename: str) -> dict:
     """
 
     # Делаю предсказание.
-    result = model(filename, conf=0.4)[0]
+    result = model(filename, conf=0.4, verbose=False)[0]
 
     # Преобразую результат в изображение с box.
     img = result.plot()
@@ -60,7 +59,7 @@ def predict_one(model, filename: str) -> dict:
         'conf': conf,
         'count_swan': count_swan,
         'target_image': target_image,
-        'img': img
+        'img': img,
     }
 
     return final_dict
@@ -85,7 +84,7 @@ def get_directory_name() -> str:
     now_datetime = []
     for symbol in str(datetime.now()):
         now_datetime.append(
-            symbol if symbol not in bad_symbols else "-"     
+            symbol if symbol not in bad_symbols else "-"
         )
     return f"detection_{''.join(now_datetime)}"
 

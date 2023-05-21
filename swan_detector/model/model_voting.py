@@ -5,14 +5,12 @@
 2) Дальше все результаты всех моделей анализируются.
 3) Делается вердикт на основе обобщения результатов всех моделей. """
 
-
 import os
 from datetime import datetime
 
-
 from ultralytics import YOLO
 
-from .utils import save_imgs, create_csv, analyse_target_class_by_conf
+from .utils import save_imgs, create_csv_custom, analyse_target_class_by_conf
 
 
 def load_model(path: str) -> YOLO:
@@ -42,11 +40,11 @@ def predict_one(model_list, filename: str) -> dict:
     # Делаю предсказание.
     results = []
     for model in model_list:
-        result = model(filename, conf=0.4)[0]
-        result.append(result)
+        result = model(filename, conf=0.4, verbose=False)[0]
+        results.append(result)
 
     # Преобразую результат в изображение с box.
-    img = result[0].plot()  # TODO: вывод рандомой первого изображения.
+    img = results[0].plot()  # TODO: вывод рандомой первого изображения.
 
     # Получаю классы, которые есть на изображении.
     classes = []
@@ -71,12 +69,12 @@ def predict_one(model_list, filename: str) -> dict:
 
     # Предсказанный класс для картинки.
     list_target_image = []
-    for i in range(len(tmp_classes)):
+    for i in range(len(classes)):
         target_image = analyse_target_class_by_conf(classes[i], conf[i])
         list_target_image.append(target_image)
 
     # Итоговый таргет изображения на основе голосования по количеству.
-    target_image = max(list_target_image, key=list_target_image.count)
+    target_image = max(list_target_image, key=list_target_image.count) if list_target_image else None
 
     # Результат предсказания хранится тут.
     final_dict = {
@@ -110,7 +108,7 @@ def get_directory_name() -> str:
     now_datetime = []
     for symbol in str(datetime.now()):
         now_datetime.append(
-            symbol if symbol not in bad_symbols else "-"     
+            symbol if symbol not in bad_symbols else "-"
         )
     return f"detection_{''.join(now_datetime)}"
 
@@ -120,9 +118,25 @@ def run_detection(model_list: list, list_filenames: list[str], dir_save: str) ->
     dir_name = get_directory_name()
     dir_save = os.path.join(dir_save, dir_name)
     list_final_dict = save_imgs(list_final_dict, dir_save)
-    create_csv(f"{dir_name}.csv", list_final_dict, dir_save)
+    create_csv_custom(f"{dir_name}.csv", list_final_dict, dir_save,
+                      analyzer=[[elem['target_image']] for elem in list_final_dict],
+                      submission_flag=True)
     return list_final_dict
 
 
 if __name__ == '__main__':
-    run_detection()
+    run_detection(
+        model_list=[
+            load_model("best_8l.pt"),
+            load_model("best_8l aug.pt"),
+            load_model("best_8s.pt"),
+            # load_model("best_8x aug.pt"),
+        ],
+        list_filenames=[
+            'C:/Users/vital/Desktop/chakaton/DB-2023/images/1 (1).jpg',
+            'C:/Users/vital/Desktop/chakaton/DB-2023/images/1 (2).jpg',
+            'C:/Users/vital/Desktop/chakaton/DB-2023/images/1 (3).jpg',
+            'C:/Users/vital/Desktop/chakaton/DB-2023/images/1.jpg',
+        ],
+        dir_save='C:/Users/vital/Desktop/chakaton/DB-2023',
+    )
