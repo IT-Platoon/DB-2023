@@ -1,6 +1,6 @@
 import os
 
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 from swan_detector.constants import (
     REFERENCE,
@@ -28,6 +28,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setStyleSheet(main_window_styles)
         self.path_to_model = "swan_detector/model/weights/model.pt"
         self.model = None
+        self.worker = None
 
     @QtCore.pyqtSlot()
     def on_load_button_clicked(self) -> None:
@@ -69,11 +70,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.directory_to_save,
                 self.model,
             )
-            self.worker.signals.finished.connect(
+            self.worker.finished.connect(
                 self.finish_detecting,
             )
-            self.threadpool = QtCore.QThreadPool()
-            self.threadpool.start(self.worker)
+            self.worker.setTerminationEnabled(True)
+            self.worker.start()
             QtWidgets.QMessageBox.warning(
                 self,
                 "Отлично!",
@@ -94,7 +95,12 @@ class MainWindow(QtWidgets.QMainWindow):
                 directory_to_save=self.directory_to_save,
             ),
         )
+        self.worker = None
 
         self.view_result = ResultDialog(info)
         self.view_result.show()
         self.view_result.exec_()
+
+    def closeEvent(self, event) -> None:
+        if self.worker is not None:
+            self.worker.terminate()
