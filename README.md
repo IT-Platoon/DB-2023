@@ -26,6 +26,14 @@ pyinstaller swan_detector.spec
 cp -r ./venv/lib/python3.10/site-packages/ultralytics ./dist/swan_detector/
 ```
 
+5. Использование собранного приложения:
+
+Скачивайте архив ```swan_detector``` с [ЯндексДиска](https://disk.yandex.ru/d/qRfZGD60xH-rAQ) из папки ```swan_detector_build```. Распаковывайте и пишите следующую команду:
+```bash
+sudo ./swan_detector/dist/swan_detector
+```
+После этого должно запуститься приложение.
+
 ## Используемые технологии
 
 - Python - язык программирования
