@@ -48,11 +48,11 @@ def analyse_target_class_by_count(classes: list, conf: list = None) -> str:
 
 
 def create_csv(
-        filename_csv: str,
-        list_final_dict: list,
-        dir_save: str,
-        analyzer: Union[Callable, list] = analyse_target_class_by_conf,
-        submission_flag: bool = False,
+    filename_csv: str,
+    list_final_dict: list,
+    dir_save: str,
+    analyzer: Union[Callable, list] = analyse_target_class_by_conf,
+    submission_flag: bool = False,
 ) -> None:
     """ Создание csv-файла с двумя колонками: (filename, target).
     filename_csv: str - название csv файла.
@@ -89,11 +89,11 @@ def create_csv(
 
 
 def create_csv_custom(
-        filename_csv: str,
-        list_final_dict: list,
-        dir_save: str,
-        analyzer: Union[Callable, list] = analyse_target_class_by_conf,
-        submission_flag: bool = False,
+    filename_csv: str,
+    list_final_dict: list,
+    dir_save: str,
+    analyzer: Union[Callable, list] = analyse_target_class_by_conf,
+    submission_flag: bool = False,
 ) -> None:
     """ Создание csv-файла с двумя колонками: (filename, target).
     filename_csv: str - название csv файла.

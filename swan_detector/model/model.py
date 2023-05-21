@@ -94,7 +94,12 @@ def run_detection(model, list_filenames: list[str], dir_save: str) -> list[dict]
     dir_name = get_directory_name()
     dir_save = os.path.join(dir_save, dir_name)
     list_final_dict = save_imgs(list_final_dict, dir_save)
-    create_csv_custom(f"{dir_name}.csv", list_final_dict, dir_save)
+    create_csv_custom(
+        f"{dir_name}.csv",
+        list_final_dict,
+        dir_save,
+        submission_flag=True,
+    )
     return list_final_dict
 
 
