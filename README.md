@@ -30,9 +30,11 @@ cp -r ./venv/lib/python3.10/site-packages/ultralytics ./dist/swan_detector/
 
 Скачивайте архив ```swan_detector``` с [ЯндексДиска](https://disk.yandex.ru/d/qRfZGD60xH-rAQ) из папки ```swan_detector_build```. Распаковывайте и пишите следующую команду:
 ```bash
-sudo ./swan_detector/dist/swan_detector
+sudo ./swan_detector/dist/swan_detector/swan_detector
 ```
 После этого должно запуститься приложение.
+**В собранном приложении модель присутствует**
+**Продублировали модель на яндекс диск для запуска локально без сборки**
 
 ## Используемые технологии
 
