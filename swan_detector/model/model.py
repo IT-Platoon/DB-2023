@@ -59,7 +59,7 @@ def predict_one(model, filename: str) -> dict:
         'conf': conf,
         'count_swan': count_swan,
         'target_image': target_image,
-        'img': img
+        'img': img,
     }
 
     return final_dict
@@ -84,7 +84,7 @@ def get_directory_name() -> str:
     now_datetime = []
     for symbol in str(datetime.now()):
         now_datetime.append(
-            symbol if symbol not in bad_symbols else "-"     
+            symbol if symbol not in bad_symbols else "-"
         )
     return f"detection_{''.join(now_datetime)}"
 

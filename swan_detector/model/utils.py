@@ -1,5 +1,5 @@
 import os
-from typing import Callable
+from typing import Callable, Union
 
 import cv2
 import numpy as np
@@ -23,8 +23,8 @@ def analyse_target_class_by_conf(classes: list, conf: list) -> str:
 
         else:
             summator[name_class] += conf[i].item()
-    
-    return max(summator, key=summator.get)
+
+    return max(summator, key=summator.get) if summator else None
 
 
 def analyse_target_class_by_count(classes: list, conf: list = None) -> str:
@@ -43,15 +43,16 @@ def analyse_target_class_by_count(classes: list, conf: list = None) -> str:
 
         else:
             summator[name_class] += 1
-    
-    return max(summator, key=summator.get)
+
+    return max(summator, key=summator.get) if summator else None
 
 
 def create_csv(
-    filename_csv: str,
-    list_final_dict: list,
-    dir_save: str,
-    analyzer: Callable[[list, list | None], str] = analyse_target_class_by_conf,
+        filename_csv: str,
+        list_final_dict: list,
+        dir_save: str,
+        analyzer: Union[Callable, list] = analyse_target_class_by_conf,
+        submission_flag: bool = False,
 ) -> None:
     """ Создание csv-файла с двумя колонками: (filename, target).
     filename_csv: str - название csv файла.
@@ -63,24 +64,87 @@ def create_csv(
     list_target = []
 
     # Определяю target каждого изображения.
-    for final_dict in list_final_dict:
+    for idx, final_dict in enumerate(list_final_dict):
 
         list_filename.append(final_dict['filename'])
 
-        analyzed_target_class = analyzer(
-            final_dict['classes'],
-            final_dict['conf']
-        )
+        if isinstance(analyzer, Callable):
+            analyzed_target_class = analyzer(
+                final_dict['classes'],
+                final_dict['conf'],
+            )
+        else:
+            analyzed_target_class = analyzer[idx][0]
+
         list_target.append(analyzed_target_class)
 
     df = pd.DataFrame(
         {
-            'filename': list_filename,
-            'target': list_target
+            'name': list_filename,
+            'class': list_target,
         }
     )
 
     df.to_csv(os.path.join(dir_save, filename_csv), index=False)
+
+
+def create_csv_custom(
+        filename_csv: str,
+        list_final_dict: list,
+        dir_save: str,
+        analyzer: Union[Callable, list] = analyse_target_class_by_conf,
+        submission_flag: bool = False,
+) -> None:
+    """ Создание csv-файла с двумя колонками: (filename, target).
+    filename_csv: str - название csv файла.
+    list_final_dict: list[dict] - список предсказанных изображений.
+    analyzer: function - функция подсчёта таргета на изображении.
+    return: None """
+
+    list_filename = []
+    list_target = []
+
+    # Определяю target каждого изображения.
+    for idx, final_dict in enumerate(list_final_dict):
+
+        list_filename.append(final_dict['filename'])
+
+        if isinstance(analyzer, Callable):
+            analyzed_target_class = analyzer(
+                final_dict['classes'],
+                final_dict['conf'],
+            )
+        else:
+            analyzed_target_class = analyzer[idx][0]
+
+        # Классы для отправки решения хакатона.
+        if submission_flag:
+            if analyzed_target_class == 'small':
+                analyzed_target_class = 1
+            elif analyzed_target_class == 'klikun':
+                analyzed_target_class = 2
+            elif analyzed_target_class == 'shipun':
+                analyzed_target_class = 3
+
+        list_target.append(analyzed_target_class)
+
+    new_list_filename = []
+    for elem in list_filename:
+        try:
+            testing = elem.split("/")[-1]
+            new_list_filename.append(testing)
+        except ValueError:
+            testing = elem
+            new_list_filename.append(testing)
+
+    df = pd.DataFrame(
+        {
+            'name': new_list_filename,
+            'class': list_target,
+        }
+    )
+
+    df.to_csv(os.path.join(dir_save, filename_csv), sep=";", index=False)
 
 
 def save_imgs(list_final_dict: list, dir_save: str) -> list[dict]:
