@@ -15,6 +15,8 @@ pip install opencv-python-headless
 
 2. В папку ```swan_detector/model/weights``` поместить модель с именем ```model.pt```.
 
+**Продублировали модель на [ЯндексДиск](https://disk.yandex.ru/d/qRfZGD60xH-rAQ) для запуска локально без сборки**
+
 3. Запуск приложения
 ```bash
 python -m swan_detector
@@ -34,7 +36,6 @@ sudo ./swan_detector/dist/swan_detector/swan_detector
 ```
 После этого должно запуститься приложение.
 **В собранном приложении модель присутствует**
-**Продублировали модель на яндекс диск для запуска локально без сборки**
 
 ## Используемые технологии
 
