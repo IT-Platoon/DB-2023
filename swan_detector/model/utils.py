@@ -52,6 +52,7 @@ def create_csv(
     list_final_dict: list,
     dir_save: str,
     analyzer: Callable[[list, list | None], str] = analyse_target_class_by_conf,
+    submission_flag=False
 ) -> None:
     """ Создание csv-файла с двумя колонками: (filename, target).
     filename_csv: str - название csv файла.
@@ -71,6 +72,16 @@ def create_csv(
             final_dict['classes'],
             final_dict['conf']
         )
+
+        # Классы для отправки решения хакатона.
+        if submission_flag:
+            if analyzed_target_class == 'small':
+                analyzed_target_class = 1
+            elif analyzed_target_class == 'klilun':
+                analyzed_target_class = 2
+            elif analyzed_target_class == 'shipun':
+                analyzed_target_class = 3
+
         list_target.append(analyzed_target_class)
 
     df = pd.DataFrame(
